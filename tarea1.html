@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- El viewport permite que la página sea adaptativa (responsiva) para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web Personal</title>
+    
+    <!-- Importación de la fuente "Inter" desde Google Fonts para una tipografía moderna y limpia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           VARIABLES Y ESTILOS GENERALES (CSS)
+           Aquí definimos los colores base, tipos de fuente y reset inicial.
+           ========================================================================== */
+        :root {
+            --primary-color: #2563eb;       /* Color principal (Azul) */
+            --primary-hover: #1d4ed8;       /* Color al pasar el ratón por botones */
+            --bg-color: #f8fafc;            /* Color de fondo general de la página */
+            --card-bg: #ffffff;             /* Color de fondo de las tarjetas de contenido */
+            --text-color: #1e293b;          /* Color del texto principal */
+            --text-muted: #64748b;         /* Color para textos secundarios o subtítulos */
+            --border-color: #e2e8f0;       /* Color de bordes ligeros */
+            --radius: 16px;                 /* Bordes redondeados para tarjetas e imágenes */
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+
+        /* Reseteo básico para eliminar márgenes por defecto */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        /* Contenedor principal que centra todo el contenido en pantalla */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px; /* Espaciado entre cada sección/tarjeta */
+        }
+
+        /* Estilo general para las tarjetas/bloques de la página */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        /* ==========================================================================
+           1. SECCIÓN DE PERFIL (FOTO, NOMBRE, ENCABEZADO)
+           ========================================================================== */
+        .profile-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Foto de perfil circular */
+        .profile-img-container {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garantiza que la imagen no se deforme */
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 6px;
+        }
+
+        .profile-title {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Encabezados de secciones (H2) */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* ==========================================================================
+           2. DATOS DE CONTACTO (GRID REPTIBLE)
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background-color: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+        }
+
+        .contact-info label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info span, .contact-info a {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ==========================================================================
+           3. HOBBIES
+           ========================================================================== */
+        .hobbies-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hobby-tag {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .hobby-tag:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           4. REDES SOCIALES
+           ========================================================================== */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .social-btn {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           5. VIDEO RESPONSIVO (YOUTUBE)
+           Mantendrá siempre una proporción de aspecto 16:9 perfecta en móviles.
+           ========================================================================== */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: #000000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Pie de página explicativo */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="main-container">
+
+        <!-- ==========================================================================
+             SECCIÓN 1: PERFIL (FOTO, NOMBRE Y APELLIDO)
+             ========================================================================== -->
+        <section class="card profile-card">
+            <div class="profile-img-container">
+                <!-- INSTRUCCIÓN FOTO DE PERFIL:
+                     Cambia el enlace dentro de src="..." por la ruta de tu foto.
+                     Puede ser una URL de internet o una foto local (ejemplo: "foto.jpg") -->
+                <img src="angel.png" 
+                     alt="Foto de Perfil" 
+                     class="profile-img"
+                     id="profile-pic">
+            </div>
+
+            <!-- INSTRUCCIÓN NOMBRE Y APELLIDO: 
+                 Reemplaza los textos "TU NOMBRE" y "TU APELLIDO" -->
+            <h1 class="profile-name">ANGEL RAFAEL OVALLES</h1>
+            <p class="profile-title">ESTUDIANTE DE DESARROLLO DE SOFTWARE</p>
+        </section>
+
+        <!-- ==========================================================================
+             SECCIÓN 2: INFORMACIÓN DE CONTACTO
+             ========================================================================== -->
+        <section class="card">
+            <h2 class="section-title"><span>📱</span> Contacto</h2>
+            
+            <div class="contact-grid">
+                <!-- Teléfono -->
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div class="contact-info">
+                        <label>Teléfono</label>
+                        <!-- Cambia el texto del teléfono y el número en href="tel:..." -->
+                        <a href="tel:+18099017898">+1 809 901 7898</a>
+                    </div>
+                </div>
+
+                <!-- Correo Electrónico -->
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <div class="contact-info">
+                        <label>Correo Electrónico</label>
+                        <!-- Cambia tu correo aquí y en href="mailto:..." -->
+                        <a href="mailto:AX479249@GMAIL.COM">AX479249@GMAIL.COM</a>
+                    </div>
+                </div>
+
+                <!-- Dirección / Ubicación -->
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div class="contact-info">
+                        <label>Dirección</label>
+                        <!-- Reemplaza con tu Ciudad / País o Dirección -->
+                        <span>SANTO DOMINGO, REPUBLICA DOMINICANA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECCIÓN 3: HOBBIES
+             ========================================================================== -->
+        <section class="card">
+            <h2 class="section-title"><span>🎨</span> Hobbies y Pasatiempos</h2>
+            <p style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem;">
+                Algunas de las actividades que más disfruto en mi tiempo libre:
+            </p>
+            
+            <!-- INSTRUCCIÓN HOBBIES:
+                 Añade o quita elementos <li> según necesites. 
+                 Puedes cambiar el emoji y el texto dentro de cada uno. -->
+            <ul class="hobbies-list">
+                <li class="hobby-tag"><span>🏋️‍♂️</span> GIMNASIO</li>
+                <li class="hobby-tag"><span>🥊</span> BOXEAR</li>
+                <li class="hobby-tag"><span>🎧</span> ESCUCHAR MUSICA</li>
+                <li class="hobby-tag"><span>💀</span> CUSTOMER SERVICE DE VERIZON</li>
+                <li class="hobby-tag"><span>💻</span> Programación</li>
+                <li class="hobby-tag"><span>🎮</span> VIDEOJUEGOS</li>
+            </ul>
+        </section>
+
+        <!-- ==========================================================================
+             SECCIÓN 4: REDES SOCIALES
+             ========================================================================== -->
+        <section class="card">
+            <h2 class="section-title"><span>🌐</span> Mis Redes Sociales</h2>
+            
+            <!-- INSTRUCCIÓN REDES SOCIALES:
+                 Cambia el enlace "href" por la URL completa de tus perfiles reales. 
+                 Si no usas alguna red, puedes borrar el bloque <a> completo. -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/angel-rafael-ovalles-7943253b3/" target="_blank" class="social-btn">
+                    LinkedIn
+                </a>
+                <a href="https://github.com/cannedsaturn749" target="_blank" class="social-btn">
+                    GitHub
+                </a>
+                <a href="https://www.instagram.com/_simply.0va11es/" target="_blank" class="social-btn">
+                    Instagram
+                </a>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECCIÓN 5: VIDEO FAVORITO DE YOUTUBE
+             ========================================================================== -->
+        <section class="card">
+            <h2 class="section-title"><span>🎬</span> Mi Video Favorito</h2>
+            <p style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem;">
+                Un video de YouTube que me gusta o recomiendo compartir:
+            </p>
+
+            <!-- INSTRUCCIÓN VIDEO YOUTUBE:
+                 Para poner tu propio video:
+                 1. Ve a YouTube al video que quieras.
+                 2. Haz clic en "Compartir" -> "Insertar" (Embed).
+                 3. Copia el identificador único del video de la URL (los caracteres después de "embed/").
+                 4. Sustituye "dQw4w9WgXcQ" en el atributo src de abajo por el ID de tu video. -->
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/watch?v=KJoeTh00gjk&list=RD1ZQTPXRd0_A&index=4" 
+                    title="Video destacado de YouTube" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© PAGINA WEB DE ANGEL</p>
+    </footer>
+
+</body>
+</html>
